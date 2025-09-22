@@ -9,17 +9,11 @@
 
 using namespace std;
 
-//Estructura para la cola (Pasajeros pendientes)
+//Estructura para la cola (Pasajeros pendientes) y pila (cambios revertidos)
 struct Pasajero {
     string nombre;
     string nroVuelo;
     Pasajero* sig;
-};
-
-//Estructura para la pila (Para pasajero procesados)
-struct Chequeo {
-    string nroVuelo;
-    Chequeo* sig;
 };
 
 #endif //AEROPUERTO_PP2_DOMINIO_H
