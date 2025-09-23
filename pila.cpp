@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool isEmpty(Pila pila) {
+bool isEmpty(const Pila& pila) {
     if (pila.tope == nullptr) {
         return true;
     }
@@ -55,7 +55,7 @@ void printPilaRec(Pasajero* cabeza) {
     cout<<"  " <<cabeza->nombre<<", "<<cabeza->id<<", "<<cabeza->nroVuelo<<endl;
 }
 
-void printPilaRec(Pila pila) {
+void printPilaRec(const Pila& pila) {
     printPilaRec(pila.tope);
 }
 
@@ -84,7 +84,7 @@ int sizeRec(Pasajero* cabeza) {
     return 1 + sizeRec(cabeza->sig);
 }
 
-int sizeRec(Pila pila) {
+int sizeRec(const Pila& pila) {
     return sizeRec(pila.tope);
 }
 
@@ -100,6 +100,6 @@ Pasajero* searchRec(Pasajero* cabeza, int id) {
     return searchRec(cabeza->sig, id);
 }
 
-Pasajero* searchRec(Pila& pila, int id) {
+Pasajero* searchRec(const Pila& pila, int id) {
     return searchRec(pila.tope, id);
 }
