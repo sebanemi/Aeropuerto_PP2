@@ -6,7 +6,7 @@
 using namespace std;
 
 int main() {
-    Pasajero* stack = nullptr;
+    Pila stack{};
     Pasajero* pas = crearNuevoPasajero("seba",1,"123A");
     Pasajero* pa2 = crearNuevoPasajero("juan",2,"123A");
     Pasajero* pa3 = crearNuevoPasajero("pedro",3,"123A");
@@ -21,6 +21,8 @@ int main() {
     cout<<"POPING:"<<endl;
     pop(stack);
     printPilaRec(stack);
+
+    cout<<"SIZE:"<<sizeRec(stack)<<endl;
 
     clearRec(stack);
 

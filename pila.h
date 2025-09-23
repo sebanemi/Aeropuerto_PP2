@@ -1,25 +1,30 @@
 //
 // Created by seban on 22/9/2025.
 //
-#include "dominio.h"
 #include <iostream>
 
 #ifndef AEROPUERTO_PP2_PILA_H
 #define AEROPUERTO_PP2_PILA_H
 
+#include "dominio.h"
+
 using namespace std;
 
-bool isEmpty(Pasajero* cabeza);
+struct Pila {
+    Pasajero* tope = nullptr;
+};
 
-void push(Pasajero*& cabeza, Pasajero* pas);
+bool isEmpty(Pila p);
 
-Pasajero* pop(Pasajero*& cabeza);
+void push(Pila& cabeza, Pasajero* pas);
 
-void printPilaRec(Pasajero* cabeza);
+Pasajero* pop(Pila& p);
 
-void clearRec(Pasajero*& cabeza);
+void printPilaRec(Pila p);
 
-int sizeRec(Pasajero* cabeza);
+void clearRec(Pila& p);
+
+int sizeRec(Pila p);
 
 Pasajero* searchRec(Pasajero* cabeza, int id);
 

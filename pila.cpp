@@ -4,8 +4,8 @@
 
 using namespace std;
 
-bool isEmpty(Pasajero* cabeza) {
-    if (cabeza == nullptr) {
+bool isEmpty(Pila pila) {
+    if (pila.tope == nullptr) {
         return true;
     }
     return false;
@@ -16,15 +16,15 @@ bool isEmpty(Pasajero* cabeza) {
  * Recibe como parametro la cabecera de la pila y el objeto pasajero que se removió de la cola
  *
  */
-void push(Pasajero*& cabeza, Pasajero* pas) {
-    if (cabeza == nullptr) {
-        cabeza = pas;
+void push(Pila& pila, Pasajero* pas) {
+    if (pila.tope == nullptr) {
+        pila.tope = pas;
         pas->sig = nullptr;
         return;
     }
 
-    pas->sig = cabeza;
-    cabeza = pas;
+    pas->sig = pila.tope;
+    pila.tope = pas;
 }
 
 //Lo hago como un removeFirst
@@ -33,14 +33,14 @@ void push(Pasajero*& cabeza, Pasajero* pas) {
  * Devuelve un puntero a pasajero para que se inserte nuevamente en la cola
  *
  */
-Pasajero* pop(Pasajero*& cabeza) {
-    if (cabeza == nullptr) {
+Pasajero* pop(Pila& pila) {
+    if (pila.tope == nullptr) {
         return nullptr;
     }
 
-    Pasajero* pasajero = cabeza;
+    Pasajero* pasajero = pila.tope;
 
-    cabeza = cabeza->sig;
+    pila.tope = pila.tope->sig;
 
     return pasajero;
 }
@@ -53,7 +53,10 @@ void printPilaRec(Pasajero* cabeza) {
     printPilaRec(cabeza->sig);
 
     cout<<"  " <<cabeza->nombre<<", "<<cabeza->id<<", "<<cabeza->nroVuelo<<endl;
+}
 
+void printPilaRec(Pila pila) {
+    printPilaRec(pila.tope);
 }
 
 void clearRec(Pasajero*& cabeza) {
@@ -68,6 +71,10 @@ void clearRec(Pasajero*& cabeza) {
     eliminarPasajero(cabeza);
 }
 
+void clearRec(Pila& pila) {
+    clearRec(pila.tope);
+}
+
 int sizeRec(Pasajero* cabeza) {
     //Caso base
     if (cabeza == nullptr) {
@@ -75,6 +82,10 @@ int sizeRec(Pasajero* cabeza) {
     }
     //Caso recursivo
     return 1 + sizeRec(cabeza->sig);
+}
+
+int sizeRec(Pila pila) {
+    return sizeRec(pila.tope);
 }
 
 Pasajero* searchRec(Pasajero* cabeza, int id) {
@@ -87,4 +98,8 @@ Pasajero* searchRec(Pasajero* cabeza, int id) {
     }
 
     return searchRec(cabeza->sig, id);
+}
+
+Pasajero* searchRec(Pila& pila, int id) {
+    return searchRec(pila.tope, id);
 }
