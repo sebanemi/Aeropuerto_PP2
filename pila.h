@@ -2,9 +2,12 @@
 // Created by seban on 22/9/2025.
 //
 #include "dominio.h"
+#include <iostream>
 
 #ifndef AEROPUERTO_PP2_PILA_H
 #define AEROPUERTO_PP2_PILA_H
+
+using namespace std;
 
 bool isEmpty(Pasajero* cabeza) {
     if (cabeza == nullptr) {
@@ -46,21 +49,50 @@ Pasajero* pop(Pasajero*& cabeza) {
     return pasajero;
 }
 
-void printPilaRec() {
+void printPilaRec(Pasajero* cabeza) {
+    if (cabeza == nullptr) {
+        return;
+    }
+
+    printPilaRec(cabeza->sig);
+
+    cout<<"  " <<cabeza->nombre<<", "<<cabeza->nroVuelo<<endl;
 
 }
 
-void clearRec() {
+void clearRec(Pasajero*& cabeza) {
+    if (cabeza == nullptr) {
+        return;
+    }
 
+    Pasajero* siguiente = cabeza->sig;
+
+    clearRec(siguiente);
+
+    delete cabeza;
+
+    cabeza = nullptr;
 }
 
-int sizeRec() {
-    n = 0;
-    return n;
+int sizeRec(Pasajero* cabeza) {
+    //Caso base
+    if (cabeza == nullptr) {
+        return 0;
+    }
+    //Caso recursivo
+    return 1 + sizeRec(cabeza->sig);
 }
 
-void searchRec() {
+Pasajero* searchRec(Pasajero* cabeza, int id) {
+    if (cabeza == nullptr) {
+        return nullptr;
+    }
 
+    if (cabeza->id == id) {
+        return cabeza;
+    }
+
+    return searchRec(cabeza->sig, id);
 }
 
 #endif //AEROPUERTO_PP2_PILA_H

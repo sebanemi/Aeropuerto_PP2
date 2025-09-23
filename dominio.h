@@ -12,6 +12,7 @@ using namespace std;
 //Estructura para la cola (Pasajeros pendientes) y pila (cambios revertidos)
 struct Pasajero {
     string nombre;
+    int id;
     string nroVuelo;
     Pasajero* sig;
 };
