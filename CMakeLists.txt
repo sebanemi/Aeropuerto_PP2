@@ -3,7 +3,9 @@ project(Aeropuerto_PP2)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Aeropuerto_PP2 main.cpp
+add_executable(Aeropuerto_PP2
         dominio.h
         pila.h
+        pila.cpp
+        prueba_pila.cpp
 )

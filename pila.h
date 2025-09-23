@@ -9,90 +9,18 @@
 
 using namespace std;
 
-bool isEmpty(Pasajero* cabeza) {
-    if (cabeza == nullptr) {
-        return true;
-    }
-}
+bool isEmpty(Pasajero* cabeza);
 
-//Lo hago como un addFirst
-/*
- * Recibe como parametro la cabecera de la pila y el objeto pasajero que se removió de la cola
- *
- */
-void push(Pasajero*& cabeza, Pasajero* pas) {
-    if (cabeza == nullptr) {
-        cabeza = pas;
-        pas->sig = nullptr;
-        return;
-    }
+void push(Pasajero*& cabeza, Pasajero* pas);
 
-    pas->sig = cabeza;
-    cabeza = pas;
-}
+Pasajero* pop(Pasajero*& cabeza);
 
-//Lo hago como un removeFirst
-/*
- * Recibe como parametro la cabecera de la pila
- * Devuelve un puntero a pasajero para que se inserte nuevamente en la cola
- *
- */
-Pasajero* pop(Pasajero*& cabeza) {
-    if (cabeza == nullptr) {
-        return nullptr;
-    }
+void printPilaRec(Pasajero* cabeza);
 
-    Pasajero* pasajero = cabeza;
+void clearRec(Pasajero*& cabeza);
 
-    cabeza = cabeza->sig;
+int sizeRec(Pasajero* cabeza);
 
-    return pasajero;
-}
-
-void printPilaRec(Pasajero* cabeza) {
-    if (cabeza == nullptr) {
-        return;
-    }
-
-    printPilaRec(cabeza->sig);
-
-    cout<<"  " <<cabeza->nombre<<", "<<cabeza->nroVuelo<<endl;
-
-}
-
-void clearRec(Pasajero*& cabeza) {
-    if (cabeza == nullptr) {
-        return;
-    }
-
-    Pasajero* siguiente = cabeza->sig;
-
-    clearRec(siguiente);
-
-    delete cabeza;
-
-    cabeza = nullptr;
-}
-
-int sizeRec(Pasajero* cabeza) {
-    //Caso base
-    if (cabeza == nullptr) {
-        return 0;
-    }
-    //Caso recursivo
-    return 1 + sizeRec(cabeza->sig);
-}
-
-Pasajero* searchRec(Pasajero* cabeza, int id) {
-    if (cabeza == nullptr) {
-        return nullptr;
-    }
-
-    if (cabeza->id == id) {
-        return cabeza;
-    }
-
-    return searchRec(cabeza->sig, id);
-}
+Pasajero* searchRec(Pasajero* cabeza, int id);
 
 #endif //AEROPUERTO_PP2_PILA_H
