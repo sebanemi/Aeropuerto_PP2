@@ -14,18 +14,18 @@ struct Pila {
     Pasajero* tope = nullptr;
 };
 
-bool isEmpty(Pila p);
+bool isEmpty(const Pila& p);
 
 void push(Pila& cabeza, Pasajero* pas);
 
 Pasajero* pop(Pila& p);
 
-void printPilaRec(Pila p);
+void printPilaRec(const Pila& p);
 
 void clearRec(Pila& p);
 
-int sizeRec(Pila p);
+int sizeRec(const Pila& p);
 
-Pasajero* searchRec(Pasajero* cabeza, int id);
+Pasajero* searchRec(const Pila& p, int id);
 
 #endif //AEROPUERTO_PP2_PILA_H

@@ -7,7 +7,9 @@ add_executable(Aeropuerto_PP2
         dominio.h
         pila.h
         pila.cpp
-        prueba_pila.cpp
         dominio.cpp
         utils.h
+        menu.h
+        menu.cpp
+        main.cpp
 )
