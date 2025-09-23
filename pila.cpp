@@ -65,9 +65,7 @@ void clearRec(Pasajero*& cabeza) {
 
     clearRec(siguiente);
 
-    delete cabeza;
-
-    cabeza = nullptr;
+    eliminarPasajero(cabeza);
 }
 
 int sizeRec(Pasajero* cabeza) {

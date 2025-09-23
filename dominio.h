@@ -17,4 +17,8 @@ struct Pasajero {
     Pasajero* sig;
 };
 
+Pasajero* crearPasajero(string& nombre, int id, string& nroVuelo);
+
+void eliminarPasajero(Pasajero*& p);
+
 #endif //AEROPUERTO_PP2_DOMINIO_H
