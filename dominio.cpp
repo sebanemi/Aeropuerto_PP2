@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Pasajero* crearNuevoPasajero(string& nombre, int id, string& nroVuelo) {
+Pasajero* crearNuevoPasajero( string nombre, int id, string nroVuelo) {
     return new Pasajero{nombre, id, nroVuelo, nullptr};
 }
 

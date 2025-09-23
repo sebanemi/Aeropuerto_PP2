@@ -7,13 +7,19 @@ using namespace std;
 
 int main() {
     Pasajero* stack = nullptr;
-    Pasajero* pas = new Pasajero;
-    pas->sig = nullptr;
-    pas->nombre = "seba";
-    pas->id = 1;
-    pas->nroVuelo = "123A";
-    push(stack, pas);
+    Pasajero* pas = crearNuevoPasajero("seba",1,"123A");
+    Pasajero* pa2 = crearNuevoPasajero("juan",2,"123A");
+    Pasajero* pa3 = crearNuevoPasajero("pedro",3,"123A");
 
+    push(stack, pas);
+    push(stack, pa2);
+    push(stack, pa3);
+
+    printPilaRec(stack);
+
+
+    cout<<"POPING:"<<endl;
+    pop(stack);
     printPilaRec(stack);
 
     clearRec(stack);

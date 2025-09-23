@@ -17,7 +17,7 @@ struct Pasajero {
     Pasajero* sig;
 };
 
-Pasajero* crearPasajero(string& nombre, int id, string& nroVuelo);
+Pasajero* crearNuevoPasajero(string nombre, int id, string nroVuelo);
 
 void eliminarPasajero(Pasajero*& p);
 
