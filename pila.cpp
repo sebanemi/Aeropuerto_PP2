@@ -8,6 +8,7 @@ bool isEmpty(Pasajero* cabeza) {
     if (cabeza == nullptr) {
         return true;
     }
+    return false;
 }
 
 //Lo hago como un addFirst
