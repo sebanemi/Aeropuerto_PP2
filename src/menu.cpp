@@ -1,0 +1,109 @@
+#include "dominio.h"
+#include "menu.h"
+
+#include <algorithm>
+
+#include "pila.h"
+#include "cola.h"
+#include "utils.h"
+#include <iostream>
+
+using namespace std;
+
+void mostrarMenu() {
+    cout << "\n=== TP Pilas y Colas ===\n"
+         << "1) Cargar datos preset\n"
+         << "2) Encolar evento manual\n"
+         << "3) Procesar siguiente (dequeue + push accion)\n"
+         << "4) Deshacer ultima accion (pop + revertir)\n"
+         << "5) Mostrar Cola (recursivo)\n"
+         << "6) Mostrar Pila (recursivo)\n"
+         << "7) Buscar en Cola/Pila (recursivo)\n"
+         << "8) Vaciar estructuras (recursivo)\n"
+         << "9) Estadisticas (size recursivo)\n"
+         << "0) Salir\n"
+         << "Opcion: ";
+}
+
+void loopMenu() {
+    Cola pasajeros{};
+    Pila procesados{};
+
+    int op;
+    string nombre;
+    string nroVuelo;
+    int id;
+    Pasajero* p;
+
+    do {
+        mostrarMenu();
+        cin >> op;
+
+        //Falta definir los parametros de las funciones
+
+        switch(op) {
+            case 1:
+                cargarPasajerosEnCola("data/pasajeros_preset.txt",pasajeros);
+                break;
+            case 2:
+                cout<<"Ingresar nombre: ";
+                cin >>nombre;
+                cout<<"Ingresar id: ";
+                cin>>id;
+                cout<<"Ingresar numero de vuelo: ";
+                cin>>nroVuelo;
+
+                p = crearNuevoPasajero(nombre, id, nroVuelo);
+
+                colaQueue(pasajeros, p);
+                break;
+            case 3:
+                if (!colaIsEmpty(pasajeros)) {
+                    push(procesados, colaDequeue(pasajeros));
+                }else {
+                    cout<<"COLA / PILA VACIA"<<endl;
+                }
+
+                break;
+            case 4:
+                if (!isEmpty(procesados)) {
+                    colaQueue(pasajeros,pop(procesados));
+                }else {
+                    cout<<"COLA / PILA VACIA"<<endl;
+                }
+
+                break;
+            case 5:
+                colaPrintRec(pasajeros);
+                break;
+            case 6:
+                printPilaRec(procesados);
+                break;
+            case 7:
+                cout<<"Ingresar ID a buscar: ";
+                cin>>id;
+                p = searchRec(procesados,id);
+                if (p) {
+                    cout<<"  ID: "<<p->id<<endl;
+                    cout<<"  Nombre: "<<p->nombre<<endl;
+                    cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                }else {
+                    cout<<"No encontrado"<<endl;
+                }
+                break;
+            case 8:
+                colaClearRec(pasajeros);
+                clearRec(procesados);
+                break;
+            case 9:
+                cout<<"Size cola: "<<colaSizeRec(pasajeros)<<endl;
+                cout<<"Size Pila: "<<sizeRec(procesados)<<endl;
+                break;
+            case 0:
+                cout << "Saliendo...\n";
+                break;
+            default:
+                cout << "Opcion invalida\n";
+        }
+    } while (op != 0);
+}

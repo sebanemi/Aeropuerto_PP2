@@ -1,14 +1,14 @@
 #include <iostream>
-#include "pila.h"
+#include "cola.h"
 #include "dominio.h"
 
 using namespace std;
 
 // Devuelve true si la cola está vacía (cabeza == nullptr), false en caso contrario.
 // Simple chequeo del puntero cabeza.
-bool colaIsEmpty(const Pasajero* cabeza) {
+bool colaIsEmpty(const Cola& cola) {
 
-    if (cabeza == nullptr) {
+    if (cola.primero == nullptr) {
         return true;
     }
     return false;
@@ -18,29 +18,33 @@ bool colaIsEmpty(const Pasajero* cabeza) {
 // Inserta un nodo al final de la cola.
 // Si la cola está vacía, cabeza pasa a ser el nuevo nodo.
 // Si no, recorre con un puntero auxiliar hasta el último y engancha el nuevo al final.
-void colaPush(Pasajero*& cabeza, Pasajero* pas) {
-    if (cabeza == nullptr) {
-        cabeza = pas;
+void colaQueue(Cola& cola, Pasajero* pas) {
+    if (cola.primero == nullptr) {
+        cola.primero = pas;
+        cola.ultimo = pas;
         pas->sig = nullptr;
 
     }else {
-        Pasajero* reco = cabeza;
-        while (reco->sig != nullptr) {
-reco = reco->sig;
-        }
-        reco->sig = pas;
+        cola.ultimo->sig = pas;
+        pas->sig = nullptr;
+        cola.ultimo = pas;
     }
 
 }
 
 // Extrae (y devuelve) el primer elemento de la cola.
 // Si está vacía, retorna nullptr. Si no, mueve cabeza al siguiente y retorna el viejo primero.
-Pasajero* colaPop(Pasajero*& cabeza) {
-if (cabeza == nullptr) {
-    return nullptr;
-}
-    Pasajero* reco= cabeza;
-cabeza = cabeza->sig;
+Pasajero* colaDequeue(Cola& cola) {
+    if (cola.primero == nullptr) {
+        return nullptr;
+    }
+    Pasajero* reco= cola.primero;
+    cola.primero = cola.primero->sig;
+
+    //Cola vacia
+    if (cola.primero == nullptr) {
+        cola.ultimo = nullptr;
+    }
 
     return reco;
 }
@@ -58,6 +62,11 @@ void colaPrintRec(const Pasajero* cabeza) {
     colaPrintRec(cabeza->sig);
 }
 
+void colaPrintRec(const Cola& cola) {
+    colaPrintRec(cola.primero);
+}
+
+
 // RECURSIVA
 // Libera recursivamente todos los nodos de la cola.
 // Guarda el siguiente, borra el actual y continúa con el resto hasta nullptr.
@@ -72,6 +81,11 @@ void colaClearRec(Pasajero*& cabeza) {
     colaClearRec(siguiente);
 }
 
+void colaClearRec(Cola& cola) {
+    colaClearRec(cola.primero);
+    cola.ultimo = nullptr;
+}
+
 // RECURSIVA
 // Calcula el tamaño de la cola contando nodos.
 // Caso base: nullptr → 0. Caso recursivo: 1 + tamaño del resto (cabeza->sig).
@@ -82,6 +96,10 @@ int colaSizeRec( const Pasajero* cabeza) {
     }
 
     return 1 + colaSizeRec(cabeza->sig);
+}
+
+int colaSizeRec(const Cola& cola) {
+    return colaSizeRec(cola.primero);
 }
 
 // RECURSIVA
@@ -98,4 +116,8 @@ Pasajero* colaSearchRec(Pasajero* cabeza, int id) {
 
     // caso recursivo: buscar en el resto de la lista
     return colaSearchRec(cabeza->sig, id);
+}
+
+Pasajero* colaSearchRec(const Cola& cola, int id) {
+    return colaSearchRec(cola.primero, id);
 }

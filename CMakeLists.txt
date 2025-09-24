@@ -4,15 +4,15 @@ project(Aeropuerto_PP2)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(Aeropuerto_PP2
-        dominio.h
-        pila.h
-        pila.cpp
-        dominio.cpp
-        utils.h
-        menu.h
-        menu.cpp
-        main.cpp
-        cola.cpp
-        cola.h
-        utils.cpp
+        src/dominio.h
+        src/pila.h
+        src/pila.cpp
+        src/dominio.cpp
+        src/utils.h
+        src/menu.h
+        src/menu.cpp
+        src/main.cpp
+        src/cola.cpp
+        src/cola.h
+        src/utils.cpp
 )

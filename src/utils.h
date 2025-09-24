@@ -1,7 +1,6 @@
 #include <string>
 #include "dominio.h"
-#include "pila.h"
-//#include "cola.h"
+#include "cola.h"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ using namespace std;
  * armó mati
  */
 
-bool cargarPasajerosEnCola(string filename, Pasajero*& first, Pasajero*& last);
+bool cargarPasajerosEnCola(string filename, Cola& cola);
 
 bool validarId(int id);
 

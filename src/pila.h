@@ -1,6 +1,4 @@
-//
-// Created by seban on 22/9/2025.
-//
+
 #include <iostream>
 
 #ifndef AEROPUERTO_PP2_PILA_H

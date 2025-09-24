@@ -2,6 +2,9 @@
 #include <sstream>
 #include <cctype>
 #include "utils.h"
+
+#include <chrono>
+
 #include "cola.h"
 #include "dominio.h"
 using namespace std;
@@ -15,12 +18,16 @@ using namespace std;
 
 // Lee filename (lineas: nombre,id,nroVuelo), crea Pasajero y lo encola al final usando colaPush.
 // Actualiza first/last según corresponda; devuelve true si pudo abrir y procesar.
-bool cargarPasajerosEnCola(string filename, Pasajero*& first, Pasajero*& last) {
-    ifstream file(filename);
-    if (!file.is_open()) return false;
+bool cargarPasajerosEnCola(string filename, Cola& cola) {
+    ifstream myReadFile(filename);
+    if (!myReadFile.is_open()) {
+        cerr << "No pude abrir: " << filename << endl;
+        return false;
+    }
+    if (!myReadFile.is_open()) return false;
 
     string linea;
-    while (getline(file, linea)) {
+    while (getline(myReadFile, linea)) {
         if (linea.empty()) continue;
 
         stringstream ss(linea);
@@ -31,11 +38,10 @@ bool cargarPasajerosEnCola(string filename, Pasajero*& first, Pasajero*& last) {
 
         int id = stoi(idStr);
         Pasajero* nuevo = crearNuevoPasajero(nombre, id, nroVuelo);
-        colaPush(first, nuevo);
-        last = nuevo;
+        colaQueue(cola, nuevo);
     }
 
-    file.close();
+    myReadFile.close();
     return true;
 }
 
