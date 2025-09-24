@@ -13,4 +13,6 @@ add_executable(Aeropuerto_PP2
         menu.cpp
         main.cpp
         cola.cpp
+        cola.h
+        utils.cpp
 )

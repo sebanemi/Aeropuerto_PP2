@@ -9,7 +9,7 @@ using namespace std;
 #define AEROPUERTO_PP2_UTILS_H
 
 /*
- * Lee el archivo preset, crea un nuevo Pasajero usando la funcion de dominio.cpp y lo encola usando la función que
+ * Lee el archivo preset (pasajeros_preset.txt), crea un nuevo Pasajero usando la funcion de dominio.cpp y lo encola usando la función que
  * armó mati
  */
 

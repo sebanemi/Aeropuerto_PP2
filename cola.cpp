@@ -6,7 +6,7 @@ using namespace std;
 
 // Devuelve true si la cola está vacía (cabeza == nullptr), false en caso contrario.
 // Simple chequeo del puntero cabeza.
-bool colaIsEmpty(Pasajero* cabeza) {
+bool colaIsEmpty(const Pasajero* cabeza) {
 
     if (cabeza == nullptr) {
         return true;
@@ -48,7 +48,7 @@ cabeza = cabeza->sig;
 // RECURSIVA
 // Imprime la cola en orden de cabeza hacia el final.
 // Caso base: cabeza == nullptr (corta). Caso recursivo: imprime actual y llama con cabeza->sig.
-void colaPrintRec(Pasajero* cabeza) {
+void colaPrintRec(const Pasajero* cabeza) {
     if (cabeza == nullptr) {
         return;
     }
@@ -75,13 +75,13 @@ void colaClearRec(Pasajero*& cabeza) {
 // RECURSIVA
 // Calcula el tamaño de la cola contando nodos.
 // Caso base: nullptr → 0. Caso recursivo: 1 + tamaño del resto (cabeza->sig).
-int colaSizeRec(Pasajero* cabeza) {
+int colaSizeRec( const Pasajero* cabeza) {
 
     if (cabeza == nullptr) {
         return 0;
     }
 
-    return 1 + sizeRec(cabeza->sig);
+    return 1 + colaSizeRec(cabeza->sig);
 }
 
 // RECURSIVA
