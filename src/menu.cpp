@@ -34,6 +34,7 @@ void loopMenu() {
     string nroVuelo;
     int id;
     Pasajero* p;
+    Accion* a;
 
     do {
         mostrarMenu();
@@ -56,10 +57,11 @@ void loopMenu() {
                 p = crearNuevoPasajero(nombre, id, nroVuelo);
 
                 colaQueue(pasajeros, p);
+                push(procesados, AGREGAR, p);
                 break;
             case 3:
                 if (!colaIsEmpty(pasajeros)) {
-                    push(procesados, colaDequeue(pasajeros));
+                    push(procesados,PROCESAR, colaDequeue(pasajeros));
                 }else {
                     cout<<"COLA / PILA VACIA"<<endl;
                 }
@@ -67,7 +69,17 @@ void loopMenu() {
                 break;
             case 4:
                 if (!isEmpty(procesados)) {
-                    colaQueue(pasajeros,pop(procesados));
+
+                    a = pop(procesados);
+
+                    if (a->tipo == PROCESAR) {
+                        p = a->pasajero;
+                        colaQueue(pasajeros, p);
+                    }else {
+                        a->pasajero = colaDequeue(pasajeros);
+                        eliminarPasajero(a->pasajero);
+                    }
+                    delete a;
                 }else {
                     cout<<"COLA / PILA VACIA"<<endl;
                 }

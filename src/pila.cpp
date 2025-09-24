@@ -12,19 +12,9 @@ bool isEmpty(const Pila& pila) {
 }
 
 //Lo hago como un addFirst
-/*
- * Recibe como parametro la cabecera de la pila y el objeto pasajero que se removió de la cola
- *
- */
-void push(Pila& pila, Pasajero* pas) {
-    if (pila.tope == nullptr) {
-        pila.tope = pas;
-        pas->sig = nullptr;
-        return;
-    }
-
-    pas->sig = pila.tope;
-    pila.tope = pas;
+void push(Pila& pila,TipoAccion tipo ,Pasajero* pas) {
+    Accion* a = new Accion{tipo,pas,nullptr};
+    pila.tope = a;
 }
 
 //Lo hago como un removeFirst
@@ -33,49 +23,53 @@ void push(Pila& pila, Pasajero* pas) {
  * Devuelve un puntero a pasajero para que se inserte nuevamente en la cola
  *
  */
-Pasajero* pop(Pila& pila) {
+Accion* pop(Pila& pila) {
     if (pila.tope == nullptr) {
         return nullptr;
     }
 
-    Pasajero* pasajero = pila.tope;
+    Accion* accion = pila.tope;
 
     pila.tope = pila.tope->sig;
 
-    return pasajero;
+    return accion;
 }
 
-void printPilaRec(Pasajero* cabeza) {
+void printPilaRec(const Accion* cabeza) {
     if (cabeza == nullptr) {
         return;
     }
 
     printPilaRec(cabeza->sig);
 
-    cout<<"  " <<cabeza->nombre<<", "<<cabeza->id<<", "<<cabeza->nroVuelo<<endl;
+    cout << "Accion: " << (cabeza->tipo == AGREGAR ? "AGREGAR" : "PROCESAR")
+         << " | Pasajero: " << cabeza->pasajero->nombre
+         << ", " << cabeza->pasajero->id
+         << ", " << cabeza->pasajero->nroVuelo << endl;
 }
 
 void printPilaRec(const Pila& pila) {
     printPilaRec(pila.tope);
 }
 
-void clearRec(Pasajero*& cabeza) {
+void clearRec(Accion*& cabeza) {
     if (cabeza == nullptr) {
         return;
     }
 
-    Pasajero* siguiente = cabeza->sig;
+    Accion* siguiente = cabeza->sig;
 
     clearRec(siguiente);
 
-    eliminarPasajero(cabeza);
+    delete cabeza;
+    cabeza = nullptr;
 }
 
 void clearRec(Pila& pila) {
     clearRec(pila.tope);
 }
 
-int sizeRec(Pasajero* cabeza) {
+int sizeRec(const Accion* cabeza) {
     //Caso base
     if (cabeza == nullptr) {
         return 0;
@@ -88,13 +82,13 @@ int sizeRec(const Pila& pila) {
     return sizeRec(pila.tope);
 }
 
-Pasajero* searchRec(Pasajero* cabeza, int id) {
+Pasajero* searchRec(const Accion* cabeza, int id) {
     if (cabeza == nullptr) {
         return nullptr;
     }
 
-    if (cabeza->id == id) {
-        return cabeza;
+    if (cabeza->pasajero->id == id) {
+        return cabeza->pasajero;
     }
 
     return searchRec(cabeza->sig, id);
