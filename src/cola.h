@@ -18,6 +18,8 @@ bool colaIsEmpty(const Cola& cola);
 
 void colaQueue(Cola& cola, Pasajero* pas);
 
+void colaQueueFront(Cola& cola, Pasajero* pas);
+
 Pasajero* colaDequeue(Cola& cola);
 
 // RECURSIVA

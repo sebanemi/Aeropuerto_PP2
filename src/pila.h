@@ -18,22 +18,22 @@ struct Pila {
     Accion* tope = nullptr;
 };
 
-bool isEmpty(const Pila& p);
+bool pilaIsEmpty(const Pila& p);
 
-void push(Pila& cabeza,TipoAccion tipo ,Pasajero* pas);
+void pilaPush(Pila& cabeza,TipoAccion tipo ,Pasajero* pas);
 
-Accion* pop(Pila& p);
+Accion* pilaPop(Pila& p);
 
-void printPilaRec(const Accion* cabeza);
-void printPilaRec(const Pila& p);
+void pilaPrintRec(const Accion* cabeza);
+void pilaPrintRec(const Pila& p);
 
-void clearRec(Accion*& cabeza);
-void clearRec(Pila& p);
+void pilaClearRec(Accion*& cabeza);
+void pilaClearRec(Pila& p);
 
-int sizeRec(const Accion* cabeza);
-int sizeRec(const Pila& p);
+int pilaSizeRec(const Accion* cabeza);
+int pilaSizeRec(const Pila& p);
 
-Pasajero* searchRec(const Accion* cabeza, int id);
-Pasajero* searchRec(const Pila& p, int id);
+Pasajero* pilaSearchRec(const Accion* cabeza, int id);
+Pasajero* pilaSearchRec(const Pila& p, int id);
 
 #endif //AEROPUERTO_PP2_PILA_H

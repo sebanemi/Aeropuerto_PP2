@@ -32,6 +32,19 @@ void colaQueue(Cola& cola, Pasajero* pas) {
 
 }
 
+void colaQueueFront(Cola& cola, Pasajero* pas) {
+    if (cola.primero == nullptr) {
+        cola.primero = pas;
+        cola.ultimo = pas;
+        pas->sig = nullptr;
+        return;
+    }
+
+    pas->sig = cola.primero;
+    cola.primero = pas;
+
+}
+
 // Extrae (y devuelve) el primer elemento de la cola.
 // Si está vacía, retorna nullptr. Si no, mueve cabeza al siguiente y retorna el viejo primero.
 Pasajero* colaDequeue(Cola& cola) {

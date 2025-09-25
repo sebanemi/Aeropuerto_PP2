@@ -57,25 +57,26 @@ void loopMenu() {
                 p = crearNuevoPasajero(nombre, id, nroVuelo);
 
                 colaQueue(pasajeros, p);
-                push(procesados, AGREGAR, p);
+                pilaPush(procesados, AGREGAR, p);
                 break;
             case 3:
                 if (!colaIsEmpty(pasajeros)) {
-                    push(procesados,PROCESAR, colaDequeue(pasajeros));
+                    pilaPush(procesados,PROCESAR, colaDequeue(pasajeros));
                 }else {
                     cout<<"COLA / PILA VACIA"<<endl;
                 }
 
                 break;
             case 4:
-                if (!isEmpty(procesados)) {
+                if (!pilaIsEmpty(procesados)) {
 
-                    a = pop(procesados);
+                    a = pilaPop(procesados);
 
                     if (a->tipo == PROCESAR) {
                         p = a->pasajero;
-                        colaQueue(pasajeros, p);
-                    }else {
+                        colaQueueFront(pasajeros, p);
+                    }
+                    if (a->tipo == AGREGAR) {
                         a->pasajero = colaDequeue(pasajeros);
                         eliminarPasajero(a->pasajero);
                     }
@@ -89,12 +90,12 @@ void loopMenu() {
                 colaPrintRec(pasajeros);
                 break;
             case 6:
-                printPilaRec(procesados);
+                pilaPrintRec(procesados);
                 break;
             case 7:
                 cout<<"Ingresar ID a buscar: ";
                 cin>>id;
-                p = searchRec(procesados,id);
+                p = pilaSearchRec(procesados,id);
                 if (p) {
                     cout<<"  ID: "<<p->id<<endl;
                     cout<<"  Nombre: "<<p->nombre<<endl;
@@ -105,11 +106,11 @@ void loopMenu() {
                 break;
             case 8:
                 colaClearRec(pasajeros);
-                clearRec(procesados);
+                pilaClearRec(procesados);
                 break;
             case 9:
                 cout<<"Size cola: "<<colaSizeRec(pasajeros)<<endl;
-                cout<<"Size Pila: "<<sizeRec(procesados)<<endl;
+                cout<<"Size Pila: "<<pilaSizeRec(procesados)<<endl;
                 break;
             case 0:
                 cout << "Saliendo...\n";

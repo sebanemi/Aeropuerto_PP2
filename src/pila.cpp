@@ -4,20 +4,20 @@
 
 using namespace std;
 
-bool isEmpty(const Pila& pila) {
+bool pilaIsEmpty(const Pila& pila) {
     if (pila.tope == nullptr) {
         return true;
     }
     return false;
 }
 
-void push(Pila& pila,TipoAccion tipo ,Pasajero* pas) {
+void pilaPush(Pila& pila,TipoAccion tipo ,Pasajero* pas) {
     Accion* a = new Accion{tipo,pas,nullptr};
     a->sig = pila.tope;
     pila.tope = a;
 }
 
-Accion* pop(Pila& pila) {
+Accion* pilaPop(Pila& pila) {
     if (pila.tope == nullptr) {
         return nullptr;
     }
@@ -42,7 +42,7 @@ void printPilaRec(const Accion* cabeza) {
          << ", " << cabeza->pasajero->nroVuelo << endl;
 }
 
-void printPilaRec(const Pila& pila) {
+void pilaPrintRec(const Pila& pila) {
     printPilaRec(pila.tope);
 }
 
@@ -59,7 +59,7 @@ void clearRec(Accion*& cabeza) {
     cabeza = nullptr;
 }
 
-void clearRec(Pila& pila) {
+void pilaClearRec(Pila& pila) {
     clearRec(pila.tope);
 }
 
@@ -72,7 +72,7 @@ int sizeRec(const Accion* cabeza) {
     return 1 + sizeRec(cabeza->sig);
 }
 
-int sizeRec(const Pila& pila) {
+int pilaSizeRec(const Pila& pila) {
     return sizeRec(pila.tope);
 }
 
@@ -88,6 +88,6 @@ Pasajero* searchRec(const Accion* cabeza, int id) {
     return searchRec(cabeza->sig, id);
 }
 
-Pasajero* searchRec(const Pila& pila, int id) {
+Pasajero* pilaSearchRec(const Pila& pila, int id) {
     return searchRec(pila.tope, id);
 }
