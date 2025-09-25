@@ -29,12 +29,12 @@ Accion* pilaPop(Pila& pila) {
     return accion;
 }
 
-void printPilaRec(const Accion* cabeza) {
+void pilaPrintRec(const Accion* cabeza) {
     if (cabeza == nullptr) {
         return;
     }
 
-    printPilaRec(cabeza->sig);
+    pilaPrintRec(cabeza->sig);
 
     cout << "Accion: " << (cabeza->tipo == AGREGAR ? "AGREGAR" : "PROCESAR")
          << " | Pasajero: " << cabeza->pasajero->nombre
@@ -43,7 +43,7 @@ void printPilaRec(const Accion* cabeza) {
 }
 
 void pilaPrintRec(const Pila& pila) {
-    printPilaRec(pila.tope);
+    pilaPrintRec(pila.tope);
 }
 
 void clearRec(Accion*& cabeza) {

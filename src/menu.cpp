@@ -27,12 +27,13 @@ void mostrarMenu() {
 
 void loopMenu() {
     Cola pasajeros{};
-    Pila procesados{};
+    Pila acciones{};
 
     int op;
     string nombre;
     string nroVuelo;
     int id;
+    char caracter_busqueda;
     Pasajero* p;
     Accion* a;
 
@@ -48,8 +49,10 @@ void loopMenu() {
                 break;
             case 2:
                 cout<<"Ingresar nombre: ";
+                //HACER PARA QUE SE PUEDA HACER CON ESPACIOS (MATI)
                 cin >>nombre;
                 cout<<"Ingresar id: ";
+                //VALIDAR QUE EL ID NO SE ENCUENTRE YA EN LA COLA (MATI)
                 cin>>id;
                 cout<<"Ingresar numero de vuelo: ";
                 cin>>nroVuelo;
@@ -57,20 +60,20 @@ void loopMenu() {
                 p = crearNuevoPasajero(nombre, id, nroVuelo);
 
                 colaQueue(pasajeros, p);
-                pilaPush(procesados, AGREGAR, p);
+                pilaPush(acciones, AGREGAR, p);
                 break;
             case 3:
                 if (!colaIsEmpty(pasajeros)) {
-                    pilaPush(procesados,PROCESAR, colaDequeue(pasajeros));
+                    pilaPush(acciones,PROCESAR, colaDequeue(pasajeros));
                 }else {
-                    cout<<"COLA / PILA VACIA"<<endl;
+                    cout<<"\n COLA VACIA"<<endl;
                 }
 
                 break;
             case 4:
-                if (!pilaIsEmpty(procesados)) {
+                if (!pilaIsEmpty(acciones)) {
 
-                    a = pilaPop(procesados);
+                    a = pilaPop(acciones);
 
                     if (a->tipo == PROCESAR) {
                         p = a->pasajero;
@@ -82,35 +85,67 @@ void loopMenu() {
                     }
                     delete a;
                 }else {
-                    cout<<"COLA / PILA VACIA"<<endl;
+                    cout<<"\n SIN ACCIONES A DESHACER"<<endl;
                 }
 
                 break;
             case 5:
-                colaPrintRec(pasajeros);
+                if (!colaIsEmpty(pasajeros)) {
+                    colaPrintRec(pasajeros);
+                }else {
+                    cout<<"\n COLA VACIA"<<endl;
+                }
                 break;
             case 6:
-                pilaPrintRec(procesados);
+                if (!pilaIsEmpty(acciones)) {
+                    pilaPrintRec(acciones);
+                }else {
+                    cout<<"\n PILA VACIA"<<endl;
+                }
                 break;
             case 7:
-                cout<<"Ingresar ID a buscar: ";
-                cin>>id;
-                p = pilaSearchRec(procesados,id);
-                if (p) {
-                    cout<<"  ID: "<<p->id<<endl;
-                    cout<<"  Nombre: "<<p->nombre<<endl;
-                    cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                cout<<"BUSCAR EN PILA (P) / BUSCAR EN COLA (C):";
+                cin>>caracter_busqueda;
+                //VALIDAR EL CARACTER PARA QUE SEA P o C (MATI)
+                if (caracter_busqueda=='P' || caracter_busqueda=='p') {
+                    cout<<"Ingresar ID a buscar: ";
+                    cin>>id;
+                    p = pilaSearchRec(acciones,id);
+                    if (p) {
+                        cout<<"  ID: "<<p->id<<endl;
+                        cout<<"  Nombre: "<<p->nombre<<endl;
+                        cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                    }else {
+                        cout<<"\n No encontrado en PILA"<<endl;
+                    }
                 }else {
-                    cout<<"No encontrado"<<endl;
+                    cout<<"Ingresar ID a buscar: ";
+                    cin>>id;
+                    p = colaSearchRec(pasajeros,id);
+                    if (p) {
+                        cout<<"  ID: "<<p->id<<endl;
+                        cout<<"  Nombre: "<<p->nombre<<endl;
+                        cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                    }else {
+                        cout<<"\n No encontrado en COLA"<<endl;
+                    }
                 }
                 break;
             case 8:
                 colaClearRec(pasajeros);
-                pilaClearRec(procesados);
+                pilaClearRec(acciones);
                 break;
             case 9:
-                cout<<"Size cola: "<<colaSizeRec(pasajeros)<<endl;
-                cout<<"Size Pila: "<<pilaSizeRec(procesados)<<endl;
+                if (!colaIsEmpty(pasajeros)) {
+                    cout<<"\n Size cola: "<<colaSizeRec(pasajeros)<<endl;
+                }else {
+                    cout<<"\n COLA VACIA"<<endl;
+                }
+                if (!pilaIsEmpty(acciones)) {
+                    cout<<"\n Size Pila: "<<pilaSizeRec(acciones)<<endl;
+                }else {
+                    cout<<"\n PILA PILA"<<endl;
+                }
                 break;
             case 0:
                 cout << "Saliendo...\n";
