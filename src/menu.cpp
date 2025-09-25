@@ -80,7 +80,7 @@ void loopMenu() {
                         colaQueueFront(pasajeros, p);
                     }
                     if (a->tipo == AGREGAR) {
-                        a->pasajero = colaDequeue(pasajeros);
+                        a->pasajero = colaDequeueBack(pasajeros);
                         eliminarPasajero(a->pasajero);
                     }
                     delete a;
@@ -144,11 +144,13 @@ void loopMenu() {
                 if (!pilaIsEmpty(acciones)) {
                     cout<<"\n Size Pila: "<<pilaSizeRec(acciones)<<endl;
                 }else {
-                    cout<<"\n PILA PILA"<<endl;
+                    cout<<"\n PILA VACIA"<<endl;
                 }
                 break;
             case 0:
                 cout << "Saliendo...\n";
+                colaClearRec(pasajeros);
+                pilaClearRec(acciones);
                 break;
             default:
                 cout << "Opcion invalida\n";

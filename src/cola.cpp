@@ -62,6 +62,29 @@ Pasajero* colaDequeue(Cola& cola) {
     return reco;
 }
 
+Pasajero* colaDequeueBack(Cola& cola) {
+    if (cola.primero == nullptr) {
+        return nullptr;
+    }
+    if (cola.primero == cola.ultimo) {
+        Pasajero* reco = cola.primero;
+        cola.primero = nullptr;
+        cola.ultimo = nullptr;
+        return reco;
+    }
+
+    Pasajero* actual = cola.primero;
+    while (actual->sig != cola.ultimo) {
+        actual = actual->sig;
+    }
+
+    Pasajero* reco = cola.ultimo;
+    cola.ultimo = actual;
+    actual->sig = nullptr;
+
+    return reco;
+}
+
 // RECURSIVA
 // Imprime la cola en orden de cabeza hacia el final.
 // Caso base: cabeza == nullptr (corta). Caso recursivo: imprime actual y llama con cabeza->sig.
@@ -102,7 +125,7 @@ void colaClearRec(Cola& cola) {
 // RECURSIVA
 // Calcula el tamaño de la cola contando nodos.
 // Caso base: nullptr → 0. Caso recursivo: 1 + tamaño del resto (cabeza->sig).
-int colaSizeRec( const Pasajero* cabeza) {
+int colaSizeRec(const Pasajero* cabeza) {
 
     if (cabeza == nullptr) {
         return 0;

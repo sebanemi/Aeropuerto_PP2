@@ -46,21 +46,21 @@ void pilaPrintRec(const Pila& pila) {
     pilaPrintRec(pila.tope);
 }
 
-void clearRec(Accion*& cabeza) {
+void pilaClearRec(Accion*& cabeza) {
     if (cabeza == nullptr) {
         return;
     }
 
     Accion* siguiente = cabeza->sig;
 
-    clearRec(siguiente);
+    pilaClearRec(siguiente);
 
     delete cabeza;
     cabeza = nullptr;
 }
 
 void pilaClearRec(Pila& pila) {
-    clearRec(pila.tope);
+    pilaClearRec(pila.tope);
 }
 
 int sizeRec(const Accion* cabeza) {
