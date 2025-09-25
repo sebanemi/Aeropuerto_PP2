@@ -1,0 +1,15 @@
+Ana Pérez,25340987,AR1234
+Juan Gómez,34129876,LA0450
+Lucía Díaz,28907654,AA0745
+Martín Rodríguez,31546789,IB2150
+Sofía Álvarez,40213456,UX0983
+Carlos Fernández,27190543,CM0721
+Valentina López,33058421,G30766
+Nicolás Romero,29876543,EK0241
+Camila Herrera,35670128,AF0228
+Santiago Ruiz,28765432,KL0701
+Florencia Castro,31204567,LH0510
+Joaquín Morales,39081234,AV0087
+Daniela Torres,26457890,AZ0650
+Agustín Navarro,34890127,DL1101
+Julieta Rojas,32145678,UA0989

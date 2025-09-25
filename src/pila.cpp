@@ -11,18 +11,12 @@ bool isEmpty(const Pila& pila) {
     return false;
 }
 
-//Lo hago como un addFirst
 void push(Pila& pila,TipoAccion tipo ,Pasajero* pas) {
     Accion* a = new Accion{tipo,pas,nullptr};
+    a->sig = pila.tope;
     pila.tope = a;
 }
 
-//Lo hago como un removeFirst
-/*
- * Recibe como parametro la cabecera de la pila
- * Devuelve un puntero a pasajero para que se inserte nuevamente en la cola
- *
- */
 Accion* pop(Pila& pila) {
     if (pila.tope == nullptr) {
         return nullptr;
