@@ -56,3 +56,18 @@ bool validarNroVuelo(string nroVuelo) {
     for (char c : nroVuelo) if (isdigit(static_cast<unsigned char>(c))) return true;
     return false;
 }
+
+// Recorre la cola, si encuentra la id ingresada devuelve true sino devuelve false.
+bool colaSearchBoolean(Pasajero* cabeza, int id) {
+    if (cabeza == nullptr) {
+        return false; // no lo encontró, cola vacía o llegamos al final
+    }
+
+    if (cabeza->id == id) {
+        return true; // encontrado
+    }
+
+    // caso recursivo: buscar en el resto de la lista
+    return colaSearchBoolean(cabeza->sig, id);
+}
+

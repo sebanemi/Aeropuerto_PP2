@@ -18,4 +18,6 @@ bool validarId(int id);
 
 bool validarNroVuelo(string nroVuelo);
 
+bool colaSearchBoolean(Pasajero* cabeza, int id);
+
 #endif //AEROPUERTO_PP2_UTILS_H

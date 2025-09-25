@@ -157,3 +157,4 @@ Pasajero* colaSearchRec(Pasajero* cabeza, int id) {
 Pasajero* colaSearchRec(const Cola& cola, int id) {
     return colaSearchRec(cola.primero, id);
 }
+

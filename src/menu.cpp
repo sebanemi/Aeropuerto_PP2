@@ -41,19 +41,22 @@ void loopMenu() {
         mostrarMenu();
         cin >> op;
 
-        //Falta definir los parametros de las funciones
-
         switch(op) {
             case 1:
                 cargarPasajerosEnCola("data/pasajeros_preset.txt",pasajeros);
                 break;
             case 2:
-                cout<<"Ingresar nombre: ";
-                //HACER PARA QUE SE PUEDA HACER CON ESPACIOS (MATI)
-                cin >>nombre;
-                cout<<"Ingresar id: ";
-                //VALIDAR QUE EL ID NO SE ENCUENTRE YA EN LA COLA (MATI)
-                cin>>id;
+                cout << "Ingresar nombre: ";
+                cin.ignore();              // limpia el \n que quedó en el buffer del cin anterior
+                getline(cin, nombre);      // ahora sí admite espacios
+                cout << "Ingresar id: ";
+                cin >> id;
+
+                if (colaSearchBoolean(pasajeros.primero , id)) {
+                    cout << "ERROR: El id ingresado ya se encuentra en la cola." << endl;
+                    break;  // no lo agrego
+                }
+
                 cout<<"Ingresar numero de vuelo: ";
                 cin>>nroVuelo;
 
@@ -106,29 +109,33 @@ void loopMenu() {
             case 7:
                 cout<<"BUSCAR EN PILA (P) / BUSCAR EN COLA (C):";
                 cin>>caracter_busqueda;
-                //VALIDAR EL CARACTER PARA QUE SEA P o C (MATI)
-                if (caracter_busqueda=='P' || caracter_busqueda=='p') {
-                    cout<<"Ingresar ID a buscar: ";
-                    cin>>id;
-                    p = pilaSearchRec(acciones,id);
-                    if (p) {
-                        cout<<"  ID: "<<p->id<<endl;
-                        cout<<"  Nombre: "<<p->nombre<<endl;
-                        cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                if (caracter_busqueda=='P' || caracter_busqueda=='p' || caracter_busqueda=='C' || caracter_busqueda=='c') {
+                    //VALIDAR EL CARACTER PARA QUE SEA P o C
+                    if (caracter_busqueda=='P' || caracter_busqueda=='p') {
+                        cout<<"Ingresar ID a buscar: ";
+                        cin>>id;
+                        p = pilaSearchRec(acciones,id);
+                        if (p) {
+                            cout<<"  ID: "<<p->id<<endl;
+                            cout<<"  Nombre: "<<p->nombre<<endl;
+                            cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                        }else {
+                            cout<<"\n No encontrado en PILA"<<endl;
+                        }
                     }else {
-                        cout<<"\n No encontrado en PILA"<<endl;
+                        cout<<"Ingresar ID a buscar: ";
+                        cin>>id;
+                        p = colaSearchRec(pasajeros,id);
+                        if (p) {
+                            cout<<"  ID: "<<p->id<<endl;
+                            cout<<"  Nombre: "<<p->nombre<<endl;
+                            cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
+                        }else {
+                            cout<<"\n No encontrado en COLA"<<endl;
+                        }
                     }
                 }else {
-                    cout<<"Ingresar ID a buscar: ";
-                    cin>>id;
-                    p = colaSearchRec(pasajeros,id);
-                    if (p) {
-                        cout<<"  ID: "<<p->id<<endl;
-                        cout<<"  Nombre: "<<p->nombre<<endl;
-                        cout<<"  Nro vuelo: "<<p->nroVuelo<<endl;
-                    }else {
-                        cout<<"\n No encontrado en COLA"<<endl;
-                    }
+                    cout<<"No ingresa |p| ni |c| INTENTE DENUEVO" <<endl;
                 }
                 break;
             case 8:
