@@ -45,18 +45,6 @@ bool cargarPasajerosEnCola(string filename, Cola& cola) {
     return true;
 }
 
-// Devuelve true si el id es válido (positivo); false en caso contrario.
-bool validarId(int id) {
-    return id > 0;
-}
-
-// Devuelve true si el nroVuelo no está vacío y contiene al menos un dígito.
-bool validarNroVuelo(string nroVuelo) {
-    if (nroVuelo.empty()) return false;
-    for (char c : nroVuelo) if (isdigit(static_cast<unsigned char>(c))) return true;
-    return false;
-}
-
 // Recorre la cola, si encuentra la id ingresada devuelve true sino devuelve false.
 bool colaSearchBoolean(Pasajero* cabeza, int id) {
     if (cabeza == nullptr) {
